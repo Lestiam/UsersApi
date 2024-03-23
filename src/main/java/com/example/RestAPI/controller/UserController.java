@@ -24,4 +24,36 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public void excluir(@PathVariable String id) {userService.excluir(id);}
+
+    // Utilizando consultas personalizadas
+
+    //http://localhost:8080/users/buscarPorNome/joao
+    @GetMapping("/buscarPorNome/{nome}")
+    public List<UserEntity> buscarUsuarioPorNome(@PathVariable String nome) {
+        return userService.buscarPorNome(nome);
+    }
+
+    //http://localhost:8080/users/buscarPorEmail/joao@gmail.com
+    @GetMapping("/buscarPorEmail/{email}")
+    public List<UserEntity> buscarUsuariosPorEmail(@PathVariable String email) {
+        return userService.buscarPorEmail(email);
+    }
+
+    //http://localhost:8080/users/buscarPorNomeEEmail?nome=joao&email=joao@gmail.com
+    @GetMapping("/buscarPorNomeEEmail")
+    public List<UserEntity> buscarUsuariosPorNomeEEmail(@RequestParam("nome") String nome, @RequestParam("email") String email) {
+        return userService.buscarNomeEEmail(nome, email);
+    }
+
+    //http://localhost:8080/users/buscarPorNomeQueComecaCom/j
+    @GetMapping("/buscarPorNomeQueComecaCom/{prefixo}")
+    public List<UserEntity> buscarUsuarioPorNomeQueComecaCom(@PathVariable String prefixo) {
+        return userService.buscarPorNomeQueComecaCom(prefixo);
+    }
+
+    //http://localhost:8080/users/buscarPorNomeQueContem/joa
+    @GetMapping("/buscarPorNomeQueContem/{contem}")
+    public List<UserEntity> buscarUsuarioPorNomeQueContem(@PathVariable String contem) {
+        return userService.buscarPorNomeQueContem(contem);
+    }
 }
