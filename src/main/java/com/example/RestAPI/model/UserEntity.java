@@ -6,8 +6,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "user")
 public class UserEntity {
 
+    public UserEntity(String id, String nome, String email) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+    }
+
     @Id
     private String id;
+    private String nome;
+    private String email;
+
 
     public String getId() {
         return id;
@@ -32,8 +41,5 @@ public class UserEntity {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    private String nome;
-    private String email;
 
 }
